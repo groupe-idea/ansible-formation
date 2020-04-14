@@ -1,0 +1,4 @@
+[on premise webservers]
+web1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
+[on premise dbservers]
+db1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200

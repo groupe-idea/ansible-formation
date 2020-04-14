@@ -12,7 +12,23 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "generic/debian9"
+  #config.vm.box = "generic/debian9"
+
+  config.vm.define "web1" do |web1|
+    web1.vm.box = "generic/debian9"
+  end
+
+  config.vm.define "db1" do |db1|
+    db1.vm.box = "centos/7"
+  end
+
+  config.vm.define "web2" do |web2|
+    web2.vm.box = "generic/ubuntu1804"
+  end
+
+  config.vm.define "db2" do |db2|
+    db2.vm.box = "centos/7"
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
