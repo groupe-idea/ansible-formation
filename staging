@@ -1,4 +1,4 @@
-[cloud webservers]
+[cloud_webservers]
 web2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
-[cloud dbservers]
+[cloud_dbservers]
 db2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2202
