@@ -54,6 +54,8 @@ vagrant snapshot pop
 
 ## Ad hoc mode
 
+> :notice: Snap your Entire Lab From this point
+
 First command will check Ansible connectivity with nodes
 
 ```bash
@@ -78,10 +80,18 @@ web2 | SUCCESS => {
 Second command create an Ansible User and add it to sudoers group
 
 ```bash
-ansible all -m user -i staging -u vagrant -a "name=ansible password=$6$mysecretsalt$A0N5tMHjAuyTu2ur/9ATth8NLuF2p7S1j.qmvAy/bbiu8ILg6CQTM4guaU53Pj1o9XYVgSA5GiorVK45CThqB. groups=sudo" 
+ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512') }}" --become --ask-become-pass 
 ```
+Third command uncomment a lineinfile (sshd_config)
 
+```bash
+ansible all -m lineinfile -i staging -u vagrant -a "dest: /etc/ssh/sshd_config regexp: '^#PasswordAuthentication.*' line: 'PasswordAuthentication yes'" --become
 
 ## First Playbook All-in-one
+
+> :notice: Snap your Entire Lab From this point
+
 ## Ansible Roles usage
+
+> :notice: Snap your Entire Lab From this point
 
