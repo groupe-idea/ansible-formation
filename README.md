@@ -54,7 +54,7 @@ vagrant snapshot pop
 
 ## Ad hoc mode
 
-> :warning: Snap your Entire Lab From this point
+> :warning: Snap your Entire Lab From this point.
 
 First command will check Ansible connectivity with nodes
 
@@ -88,10 +88,4 @@ Third command uncomment a lineinfile (sshd_config)
 ansible all -m lineinfile -i staging -u vagrant -a "dest: /etc/ssh/sshd_config regexp: '^#PasswordAuthentication.*' line: 'PasswordAuthentication yes'" --become
 
 ## First Playbook All-in-one
-
-> :warning: Snap your Entire Lab From this point
-
 ## Ansible Roles usage
-
-> :warning: Snap your Entire Lab From this point
-
