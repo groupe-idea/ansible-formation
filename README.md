@@ -37,7 +37,9 @@ ssh-copy-id 127.0.0.1 -p 2222
 ```
 if it doesn't work you can do it manually by ssh in your box (vagrant ssh) and copy your key in /home/vagrant/.ssh/authorized_keys, this enable the fact that you can lauch playbooks on your vagrant box.
 
-> :warning: ** Before going further ** : Once Everything is Ok you need to snapshot your four boxes, with this you can restore a box state to the Original without destroy it and re-run the original config. 
+
+> :warning: ** Before going further ** : Once Everything is up you need to snapshot your four boxes, with this you can restore a box state to the Original without destroy it and re-run the original config. 
+
 
 To snap the entire lab 
 
