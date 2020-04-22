@@ -12,13 +12,16 @@ ssh-copy-id 127.0.0.1 -p 2222
 ```
 if it doesn't work you can do it manually by ssh in your box (vagrant ssh) and copy your key in /home/vagrant/.ssh/authorized_keys, this enable the fact that you can lauch playbooks on your vagrant box without specifing vagrant user.
 
-#Quick Demos
+# Quick Demos
 
 First you need to start your Vangrant lab 
+
 ```bash
 vagrant up
 ```
-Will start your boxes, web1 & web2 production & staging webservers (Debian 9) respectively and db1 & db2 production & staging dbservers (CentOS). You can see if everything is up and running whit 
+
+Will start your boxes, web1 & web2 production & staging webservers (Debian 9) respectively and db1 & db2 production & staging dbservers (CentOS). You can see if everything is up and running
+
 ```bash
 vagrant status
 
@@ -34,5 +37,29 @@ above with their current state. For more information about a specific
 VM, run `vagrant status NAME`.
 ```
 
-##ad hoc mode
+## Ad hoc mode
+
+First command will check Ansible connectivity with nodes
+
+```bash
+ansible -m ping all -i staging -u vagrant
+
+db2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+web2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+```
+
+## First Playbook All-in-one
+## Ansible Roles usage
 
