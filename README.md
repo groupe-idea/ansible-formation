@@ -77,15 +77,21 @@ web2 | SUCCESS => {
 }
 ```
 
-Second command create an Ansible User and add it to sudoers group
+Create an Ansible User and add it to sudoers group
 
 ```bash
-ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512') }}" --become --ask-become-pass 
+ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512') shell=/bin/bash/}}" --become 
 ```
-Third command uncomment a lineinfile (sshd_config)
+Uncomment a lineinfile (sshd_config)
 
 ```bash
-ansible all -m lineinfile -i staging -u vagrant -a "dest: /etc/ssh/sshd_config regexp: '^#PasswordAuthentication.*' line: 'PasswordAuthentication yes'" --become
+ansible all -m lineinfile -i staging -u vagrant -a "dest=/etc/ssh/sshd_config regexp='^#PasswordAuthentication.*' line='PasswordAuthentication yes'" --become
+```
 
+Restart a service
+```bash
+ansible webservers -m service -i staging -u vagrant -a "name=sshd state=restarted" --become
+```
+> :warning: **From Here you can revert back to your snap**
 ## First Playbook All-in-one
 ## Ansible Roles usage
