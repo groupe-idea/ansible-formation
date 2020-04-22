@@ -47,7 +47,7 @@ To snap the entire lab
 vagrant snapshot push
 ```
 
-To reverse to original state
+To return to first snap
 ```bash
 vagrant snapshot pop
 ```
@@ -77,7 +77,7 @@ web2 | SUCCESS => {
 }
 ```
 
-Create an Ansible User and add it to sudoers group
+Create an Ansible User note that password is @testlab encypted in sha512, we'll see a method to protect your passwords in second step (playbooks + Vault)
 
 ```bash
 ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512') shell=/bin/bash/}}" --become 
