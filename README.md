@@ -6,12 +6,6 @@ public repo for ansible formation
 * Vagrant up and running for testing purpose https://www.vagrantup.com/downloads.html
 * copy your ssh pub key on the vagrant box
 
-Once your box is started with vagrant up 
-```
-ssh-copy-id 127.0.0.1 -p 2222
-```
-if it doesn't work you can do it manually by ssh in your box (vagrant ssh) and copy your key in /home/vagrant/.ssh/authorized_keys, this enable the fact that you can lauch playbooks on your vagrant box without specifing vagrant user.
-
 # Quick Demos
 
 First you need to start your Vangrant lab 
@@ -37,6 +31,25 @@ above with their current state. For more information about a specific
 VM, run `vagrant status NAME`.
 ```
 
+Once your boxes are started with vagrant up 
+```
+ssh-copy-id 127.0.0.1 -p 2222
+```
+if it doesn't work you can do it manually by ssh in your box (vagrant ssh) and copy your key in /home/vagrant/.ssh/authorized_keys, this enable the fact that you can lauch playbooks on your vagrant box.
+
+> :warning: ** Before going further ** : Once Everything is Ok you need to snapshot your four boxes, with this you can restore a box state to the Original without destroy it and re-run the original config. 
+
+To snap the entire lab 
+
+```bash
+vagrant snapshot push
+```
+
+To reverse to original state
+```bash
+vagrant snapshot pop
+```
+
 ## Ad hoc mode
 
 First command will check Ansible connectivity with nodes
@@ -59,6 +72,13 @@ web2 | SUCCESS => {
     "ping": "pong"
 }
 ```
+
+Second command create an Ansible User and add it to sudoers group
+
+```bash
+ansible all -m user -i staging -u vagrant -a "name=ansible password=$6$mysecretsalt$A0N5tMHjAuyTu2ur/9ATth8NLuF2p7S1j.qmvAy/bbiu8ILg6CQTM4guaU53Pj1o9XYVgSA5GiorVK45CThqB. groups=sudo" 
+```
+
 
 ## First Playbook All-in-one
 ## Ansible Roles usage
