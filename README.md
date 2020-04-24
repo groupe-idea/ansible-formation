@@ -80,7 +80,7 @@ web2 | SUCCESS => {
 Create an Ansible User note that password is @testlab encypted in sha512, we'll see a method to protect your passwords in second step (playbooks + Vault)
 
 ```bash
-ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512') shell=/bin/bash/}}" --become 
+ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512')}} shell=/bin/bash" --become 
 ```
 Uncomment a lineinfile (sshd_config)
 
