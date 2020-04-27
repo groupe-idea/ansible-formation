@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "web1" do |web1|
     web1.vm.box = "generic/debian9"
+    web1.vm.network "forwarded_port", guest: 80, host: 8080
   end
 
   config.vm.define "db1" do |db1|
@@ -24,6 +25,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "web2" do |web2|
     web2.vm.box = "generic/ubuntu1804"
+    web2.vm.network "forwarded_port", guest: 80, host: 8081
   end
 
   config.vm.define "db2" do |db2|
