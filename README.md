@@ -30,6 +30,7 @@ This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
 VM, run `vagrant status NAME`.
 ```
+web1 html port 80 will be forwarded to your host on port 8080, web2 html port 80 will be 8081, once nginx up you can validate it is up with http://localhost:8080 
 
 Once your boxes are started with vagrant up 
 ```
