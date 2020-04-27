@@ -83,7 +83,6 @@ Create an Ansible User note that password is @testlab encypted in sha512, we'll 
 ansible all -m user -i staging -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512')}} shell=/bin/bash" --become 
 ```
 Uncomment a lineinfile (sshd_config)
-
 ```bash
 ansible all -m lineinfile -i staging -u vagrant -a "dest=/etc/ssh/sshd_config regexp='^#PasswordAuthentication.*' line='PasswordAuthentication yes'" --become
 ```
@@ -98,7 +97,7 @@ ansible webservers -m apt -i staging -u vagrant -a "name=nginx state=latest" --b
 ```
 Copy index.html to nginx Server
 ```bash
-ansible webservers -m copy -i staging -u vagrant -a "src=/files/index.html dest=/var/www/html/index.html owner=nginx group=nginx backup=yes" --become
+ansible webservers -m copy -i staging -u vagrant -a "src=./files/index.html dest=/var/www/html/index.html owner=root group=root backup=yes" --become
 ```
 > :warning: **From Here you can revert back to your snap**
 ## First Playbook All-in-one
