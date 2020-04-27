@@ -90,7 +90,15 @@ ansible all -m lineinfile -i staging -u vagrant -a "dest=/etc/ssh/sshd_config re
 
 Restart a service
 ```bash
-ansible webservers -m service -i staging -u vagrant -a "name=sshd state=restarted" --become
+ansible all -m service -i staging -u vagrant -a "name=sshd state=restarted" --become
+```
+Install a package
+```bash
+ansible webservers -m apt -i staging -u vagrant -a "name=nginx state=latest" --become
+```
+Copy index.html to nginx Server
+```bash
+ansible webservers -m copy -i staging -u vagrant -a "src=/files/index.html dest=/var/www/html/index.html owner=nginx group=nginx backup=yes" --become
 ```
 > :warning: **From Here you can revert back to your snap**
 ## First Playbook All-in-one
