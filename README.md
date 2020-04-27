@@ -93,7 +93,7 @@ ansible all -m service -i inventory -u vagrant -a "name=sshd state=restarted" --
 ```
 Install a package
 ```bash
-ansible webservers -m apt -i inventory -u vagrant -a "name=nginx state=latest" --become
+ansible webservers -m apt -i inventory -u vagrant -a "name=nginx state=latest update_cache=yes" --become
 ```
 Copy index.html to nginx Server
 ```bash
