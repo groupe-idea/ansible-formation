@@ -1,19 +1,16 @@
 ---
 - hosts: all
   become: yes
-  become_user: root
   gather_facts: yes
   vars_files:
   - vault.yml
+
   handlers:
     - name: restart sshd
       service:
         name: sshd
-        state: restarted
-    - name: restart nginx
-      service:
-        name: nginx
-        state: restarted
+        state: restarted 
+
   tasks:
 
   - name: create and configure a new ansible user
@@ -26,7 +23,13 @@
 
 - hosts: webservers
   become: yes
-  become_user: root
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+
   tasks:
 
   - name: ensure nginx is at the latest version
@@ -46,12 +49,17 @@
 
 - hosts: dbservers
   become: yes
-  become_user: root
+  handlers:
+    - name: restart postgres
+      service:
+        name: postgres
+        state: restarted   
+  
   tasks:
 
-  - name: ensure postgresql is at the latest version
+  - name: ensure postgresql and dependencies are at the latest version
     yum:
-      name: postgresql
+      name: ['postgresql', 'postgresql-contrib', 'python-psycopg2']
       state: latest
     when: "ansible_facts['os_family'] == 'RedHat'"
 
@@ -59,4 +67,24 @@
     service:
       name: postgresql
       state: started
-    when: "ansible_facts['os_family'] == 'RedHat'"   
+    when: "ansible_facts['os_family'] == 'RedHat'"
+
+  - name: Ensure databases are created
+    postgresql_db: 
+      name: "{{ item.name }}"
+      lc_collate: "{{ item.collation | default('en_US.UTF-8') }}"
+      encoding: "{{ item.encoding | default('UTF-8') }}"
+      state: "{{ item.state | default('present') }}"
+    with_items: "{{ postgresql_databases }}" 
+    when: "ansible_facts['os_family'] == 'RedHat'"
+    notify: restart postgresql
+
+  # - name: Ensure user has access to the database
+  #   postgresql_user: 
+  #     db: "{{ db_name }}"
+  #     name: "{{ db_user }}"
+  #     password: "{{ db_password }}"
+  #     priv: ALL
+  #     state: present
+  #   when: "ansible_facts['os_family'] == 'RedHat'"
+  #   notify: restart postgresql  
