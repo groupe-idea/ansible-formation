@@ -1,22 +1,24 @@
 ---
 - hosts: all
-  become: yes
+  become: true
   become_user: root
   gather_facts: yes
-  include_vars: vault.yml
+  vars_files:
+  - vault.yml
   handlers:
-  - name: restart sshd
+    - name: restart sshd
       service:
-      name: sshd
-      state: restarted
-  - name: restart nginx
-      name: nginx
-      state: restarted  
+        name: sshd
+        state: restarted
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
   tasks:
   - name: create and configure a new ansible user
     user:
      name: ansible
-     password: {{ ansible_user_pass }}
+     password: "{{ansible_user_pass}}"
      shell: /bin/bash
     notify: restart sshd
 
@@ -48,4 +50,3 @@
       name: postgresql
       state: started
     when: "ansible_facts['os_family'] == 'RedHat'"   
-
