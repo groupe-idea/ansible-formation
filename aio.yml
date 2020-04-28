@@ -15,11 +15,12 @@
         name: nginx
         state: restarted
   tasks:
-  
+
   - name: create and configure a new ansible user
     user:
      name: ansible
-     password: "{{ansible_user_pass}}"
+     password: "{{ ansible_user_pass | password_hash('sha512') }}"
+     update_password: on_create
      shell: /bin/bash
     notify: restart sshd
 
