@@ -10,4 +10,8 @@ postgresql_databases:
       lc_collate: 'en_US.UTF-8'
       lc_ctype: 'en_US.UTF-8'
       template: 'template0'
-      state: present 
+      state: present
+postgresql_users:
+    - name: "{{ proddbuser }}"
+      password: "{{ proddbpassword }}"
+      state: present
