@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  become: true
+  become: yes
   become_user: root
   gather_facts: yes
   vars_files:
@@ -23,6 +23,8 @@
     notify: restart sshd
 
 - hosts: webservers
+  become: yes
+  become_user: root
   tasks:
   - name: ensure nginx is at the latest version
     apt:
@@ -37,8 +39,8 @@
     when: "ansible_facts['os_family'] == 'Debian'"  
 
 - hosts: dbservers
-  remote_user: root
-
+  become: yes
+  become_user: root
   tasks:
   - name: ensure postgresql is at the latest version
     yum:
