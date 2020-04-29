@@ -102,4 +102,36 @@ ansible webservers -m copy -i inventory -u vagrant -a "src=./files/index.html de
 ```
 > :warning: **From Here you can revert back to your snap**
 ## First Playbook All-in-one
+The All-in-one playbook aio.yml, will act on your 4 Vagrant boxes :
+* create a ansible user with @testlab password (in the vault file)
+* install nginx to the latest version on web1 and web2
+* push the files index.html from files/ to /var/www/html
+* install postgresql-server and dependencies
+* initialize db
+* create production and production2 db on db1
+* create staging and staging2 db on db2
+* create root postgres user on db1
+* create stag postgres user on db2
+
+> :warning: Snap your Entire Lab From this point.
+
+to lauch the playbook 
+
+```bash
+ansible-playbook aio.yml -i inventory -u vagrant --ask-vault-pass
+```
+you can check nginx is ok on your servers with 
+
+```bash
+curl http://localhost:8080
+curl http://localhost8081
+```
+
+you can ssh to db1 & 2 servers and check pg databases with 
+```bash
+su -u -i postgres
+pgsql
+select * from pg_databases;
+```
+> :warning: **From Here you can revert back to your snap**
 ## Ansible Roles usage
