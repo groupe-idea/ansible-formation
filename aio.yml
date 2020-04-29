@@ -41,7 +41,7 @@
 
   - name: write the nginx index file
     copy:
-      src: ./files/index.html
+      src: files/index.html
       dest: /var/www/html/index.html
       backup: yes
     when: "ansible_facts['os_family'] == 'Debian'"
