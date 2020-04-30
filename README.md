@@ -155,7 +155,8 @@ select * from pg_databases;
 
 ## Ansible Roles usage
 
-> :warning: Snap your Entire Lab From this point.
+> :warning: **Snap your Entire Lab From this point.**
+
 Users creation is separated in a role, to lauch this role you can use users_role.yml
 
 ```bash
