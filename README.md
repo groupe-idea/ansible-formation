@@ -168,7 +168,7 @@ Add a users variable containing the list of users to add. A good place to put th
 
 The following attributes are required for each user:
 
-* username - The user's username.
+* *username* - The user's username.
 * name - The full name of the user (gecos field).
 * home - The home directory of the user to create (optional, defaults to /home/username).
 * uid - The numeric user id for the user (optional). This is required for uid consistency across systems.
