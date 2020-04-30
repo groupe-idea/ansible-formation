@@ -1,5 +1,12 @@
 ---
 # tasks file for ansible-role-users
+- name: configure sshd password auth
+  lineinfile:
+    dest: /etc/ssh/sshd_config 
+    regexp: '^#PasswordAuthentication.*' 
+    line: 'PasswordAuthentication yes'
+  notify: restart sshd
+   
 - name: User creation
   user:
     name: "{{ item.username }}"

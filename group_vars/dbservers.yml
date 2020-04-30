@@ -1,0 +1,8 @@
+---
+users:
+  - username: ansible
+    name: "ansible provisionning account"
+    groups: ['wheel']
+    shell: /bin/bash
+    password: "{{ ansible_user_pass }}"
+    update_password: on_create
