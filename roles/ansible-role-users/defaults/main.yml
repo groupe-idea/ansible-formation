@@ -1,0 +1,4 @@
+---
+# defaults file for ansible-role-users
+default_update_password: on_create
+users_default_shell: /bin/bash
