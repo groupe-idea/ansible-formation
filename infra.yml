@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+  vars_files:
+  - vault.yml
+  roles:
+    - ansible-role-users

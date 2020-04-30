@@ -1,0 +1,8 @@
+---
+users:
+  - username: ansible
+    name: Ansible Provisionning User
+    groups: 'sudo'
+    home: /local/home/ansible
+    password: {{ ansible_user_pass }}
+    
