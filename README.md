@@ -85,13 +85,15 @@ web2 | SUCCESS => {
 Create an Ansible User note that password is @testlab encypted in sha512, we'll see a method to protect your passwords in second step (playbooks + Vault)
 
 ```bash
-ansible all -m user -i inventory -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512')}} shell=/bin/bash" --become
+ansible all -m user -i inventory -u vagrant -a "name=ansible password={{ '@testlab' | password_hash('sha512')}}\
+ shell=/bin/bash" --become
 ```
 
 Uncomment a lineinfile (sshd_config)
 
 ```bash
-ansible all -m lineinfile -i inventory -u vagrant -a "dest=/etc/ssh/sshd_config regexp='^#PasswordAuthentication.*' line='PasswordAuthentication yes'" --become
+ansible all -m lineinfile -i inventory -u vagrant -a "dest=/etc/ssh/sshd_config regexp='^#PasswordAuthentication.*'\
+ line='PasswordAuthentication yes'" --become
 ```
 
 Restart a service
@@ -109,7 +111,8 @@ ansible webservers -m apt -i inventory -u vagrant -a "name=nginx state=latest up
 Copy index.html to nginx Server
 
 ```bash
-ansible webservers -m copy -i inventory -u vagrant -a "src=./files/index.html dest=/var/www/html/index.html owner=root group=root backup=yes" --become
+ansible webservers -m copy -i inventory -u vagrant -a "src=./files/index.html dest=/var/www/html/index.html\
+owner=root group=root backup=yes" --become
 ```
 
 > :warning: **From Here you can revert back to your snap**
