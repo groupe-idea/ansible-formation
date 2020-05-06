@@ -9,6 +9,7 @@ Requirements
 * Ansible up and running <https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#>
 * Vagrant up and running for testing purpose <https://www.vagrantup.com/downloads.html>
 * copy your ssh pub key on the vagrant box
+* For role section you can install role from <https://github.com/notpixxl/ansible-role-formationuser.git> with ansible-galaxy
 
 Quick Demos
 -----------
