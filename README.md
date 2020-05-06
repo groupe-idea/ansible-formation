@@ -1,14 +1,17 @@
-# Ansible-formation
+Ansible-formation
+=================
 
 public repo for ansible formation
 
-## Requirements
+Requirements
+------------
 
 * Ansible up and running <https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#>
 * Vagrant up and running for testing purpose <https://www.vagrantup.com/downloads.html>
 * copy your ssh pub key on the vagrant box
 
-## Quick Demos
+Quick Demos
+-----------
 
 First you need to start your Vangrant lab
 
@@ -57,7 +60,8 @@ To return to first snap
 vagrant snapshot pop
 ```
 
-## Ad hoc mode
+Ad hoc mode
+-----------
 
 > :warning: Snap your Entire Lab From this point.
 
@@ -117,7 +121,8 @@ dest=/var/www/html/index.html owner=root group=root backup=yes" --become
 
 > :warning: **From Here you can revert back to your snap**
 
-## First Playbook All-in-one
+First Playbook All-in-one
+-------------------------
 
 The All-in-one playbook aio.yml, will act on your 4 Vagrant boxes :
 
@@ -156,7 +161,8 @@ select * from pg_databases;
 
 > :warning: **From Here you can revert back to your snap**
 
-## Ansible Roles usage
+Ansible Roles usage
+-------------------
 
 > :warning: **Snap your Entire Lab From this point.**
 
@@ -166,7 +172,8 @@ Users creation is separated in a role, to lauch this role you can use users_role
 ansible-playbook users_role.yml -i inventory -u vagrant --ask-vault-pass
 ```
 
-### Creating users
+Creating users
+--------------
 
 Add a users variable containing the list of users to add. A good place to put this is in group_vars/all or group_vars/groupname if you only want the users to be on certain machines.
 
@@ -207,3 +214,13 @@ users:
       - "ssh-rsa AAAAA.... foo@machine"
       - "ssh-rsa AAAAB.... foo2@machine"
 ```
+
+License
+-------
+
+BSD
+
+Author Information
+------------------
+
+christophepiv@gmail.com
